@@ -40,7 +40,7 @@ return [
             'timeout' => 24 * 3600,
         ],
         'mailer' => [
-            'class' => 'yii\symfonymailer\Mailer',
+            'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
             'useFileTransport' => false,
             'transport' => [
