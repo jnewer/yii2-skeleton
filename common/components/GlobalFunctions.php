@@ -362,3 +362,18 @@ if (!function_exists('mutex_unlock')) {
         return mutex()->release($name);
     }
 }
+
+
+if (!function_exists('controller')) {
+    function controller()
+    {
+        return Yii::$app->controller;
+    }
+}
+
+if (!function_exists('is_controller')) {
+    function is_controller($name)
+    {
+        return Yii::$app->controller->id == $name;
+    }
+}
