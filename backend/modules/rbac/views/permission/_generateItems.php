@@ -24,7 +24,7 @@ use yii\helpers\Html;
 
                 <tr class="action-row<?php echo $actionExists === true ? ' exists' : ''; ?><?php echo ($i++ % 2) === 0 ? ' odd' : ' even'; ?>">
                     <td class="checkbox-column"><?php echo $actionExists === false ? Html::activeCheckbox($model, 'items[' . $actionKey . ']', ['label' => '']) : ''; ?></td>
-                    <td class="name-column"><?php echo $action['name']; ?></td>
+                    <td class="name-column"><?php echo '|-- ' . $action['name']; ?></td>
                     <td class="desc-column"><?php echo $action['desc']; ?></td>
                     <td class="path-column"><?php echo substr($item['path'], $basePathLength + 1) . (isset($action['line']) === true ? ':' . $action['line'] : ''); ?></td>
                 </tr>

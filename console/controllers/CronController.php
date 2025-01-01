@@ -341,6 +341,10 @@ RAW;
 
         if (!empty($methods)) {
             foreach ($methods as $runCommand => $runSettings) {
+                if (isset($runSettings['enabled']) && !$runSettings['enabled']) {
+                    continue;
+                }
+
                 $runCommand = explode('/', $runCommand);
 
                 if (count($runCommand) == 2) {
@@ -391,10 +395,10 @@ RAW;
         $cronJobs = Yii::$app->params['cronJobs'];
         $rows = [];
         foreach ($cronJobs as $command => $cronJob) {
-            $rows[] = [$command, $cronJob['cron'], $cronJob['desc'] ?? '', $cronJob['frequency'] ?? ''];
+            $rows[] = [$command, $cronJob['cron'], $cronJob['desc'] ?? '', $cronJob['frequency'] ?? '', $cronJob['enabled'] ? '启用' : '禁用'];
         }
 
-        echo (new Table())->setHeaders(['执行命令', 'cron表达式', '描述', '执行频率'])
+        echo (new Table())->setHeaders(['执行命令', 'cron表达式', '描述', '执行频率', '状态'])
             ->setRows($rows)
             ->run();
     }
