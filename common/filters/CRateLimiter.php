@@ -5,7 +5,7 @@ namespace common\filters;
 use yii\filters\RateLimiter;
 
 /**
- * 使用示例:
+ * @usage:
  * ```php
  * public function behaviors()
  * {
