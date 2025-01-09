@@ -25,7 +25,9 @@
         "abhi1693/yii2-config": "^1.0",
         "almasaeed2010/adminlte": "2.4.18",
         "bower-asset/blueimp-gallery": "^2.21",
+        "caseyamcl/guzzle_retry_middleware": "*",
         "dektrium/yii2-rbac": "1.0.0-alpha@dev",
+        "guzzlehttp/guzzle": "^7.0",
         "kartik-v/yii2-password": "^1.5",
         "kartik-v/yii2-widgets": "^3.4",
         "rmrevin/yii2-fontawesome": "~2.15",
@@ -35,13 +37,12 @@
         "yiisoft/yii2-queue": "^2.3",
         "yiisoft/yii2-redis": "^2.0",
         "yiisoft/yii2-shell": "^2.0",
-        "yiisoft/yii2-symfonymailer": "^4.0"
+        "yiisoft/yii2-swiftmailer": "*"
     },
     "require-dev": {
-        "rector/rector": "^1.1",
         "yiisoft/yii2-debug": "~2.1.0",
         "yiisoft/yii2-faker": "~2.0.0",
-        "yiisoft/yii2-gii": "~2.1.0"
+        "yiisoft/yii2-gii": "~2.2.0"
     },
     "config": {
         "process-timeout": 1800,

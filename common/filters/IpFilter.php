@@ -10,6 +10,7 @@ use yii\web\ForbiddenHttpException;
 
 /**
  *
+ * @usage:
  * ```php
  * public function behaviors()
  * {

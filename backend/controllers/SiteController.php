@@ -2,14 +2,15 @@
 
 namespace backend\controllers;
 
-use backend\models\LoginLog;
 use Yii;
+use yii\web\Response;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\widgets\ActiveForm;
-use yii\web\Response;
+use backend\models\LoginLog;
 use backend\models\LoginForm;
+use yii\filters\AccessControl;
+use common\components\rpc\Client;
 use common\models\PasswordModifyForm;
 
 /**
@@ -33,7 +34,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'password'],
+                        'actions' => ['logout', 'index', 'password', 'test-rpc'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -163,5 +164,24 @@ class SiteController extends Controller
     public function actionServerEnv()
     {
         return $this->render('server-env');
+    }
+
+    public function actionTestRpc()
+    {
+        $client = new Client('tcp://127.0.0.1:9512');
+
+        $result = $client->request([
+            'class'   => 'User',
+            'method'  => 'get',
+            'args'    => [
+                [
+                    'uid' => 100,
+                    'username' => 'test_rpc',
+                ]
+            ]
+        ]);
+
+        var_export($result);
+        die;
     }
 }

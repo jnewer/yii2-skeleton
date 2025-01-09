@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\ArrayHelper;
+
 if (!function_exists('app')) {
     /**
      * @inheritdoc
@@ -360,5 +362,36 @@ if (!function_exists('mutex_unlock')) {
     function mutex_unlock($name)
     {
         return mutex()->release($name);
+    }
+}
+
+
+if (!function_exists('controller')) {
+    function controller()
+    {
+        return Yii::$app->controller;
+    }
+}
+
+if (!function_exists('is_controller')) {
+    function is_controller($name)
+    {
+        return Yii::$app->controller->id == $name;
+    }
+}
+
+if (!function_exists('get_console_config')) {
+    function get_console_config($name = null, $default = null)
+    {
+        $config = ArrayHelper::merge(
+            require(Yii::getAlias('@console') . '/config/params.php'),
+            require(Yii::getAlias('@console') . '/config/params-local.php')
+        );
+
+        if (!$name) {
+            return $config;
+        }
+
+        return $config[$name] ?? $default;
     }
 }

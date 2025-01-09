@@ -63,28 +63,41 @@ class ActiveRecord extends BaseActiveRecord
      */
     public function getListData($valueField = 'id', $textField = 'name', $groupField = null, $sort = '', $condition = '')
     {
-        if (empty($sort)) {
-            $sort = $this->hasAttribute('sort') ? 'sort' : 'id';
+        $key = get_class($this) . $valueField . $textField . $groupField . $sort . (is_array($condition) ? implode('', $condition) : $condition);
+        $key = md5(Yii::$app->user->id . $key);
+        $data = Yii::$app->cache->get($key);
+        if ($data === false) {
+            if (empty($sort)) {
+                $sort = $this->hasAttribute('sort') ? 'sort' : 'id';
+            }
+
+            $sort = $this->hasAttribute('first_char') ? 'first_char' : $sort; //首字母排序优先
+            if (empty($groupField)) {
+                $groupField = $this->hasAttribute('first_char') ? 'first_char' : null;
+            }
+
+            $query = parent::find();
+            $query->orderBy($sort . ' ASC');
+
+            if ($this->hasAttribute('deleted_at')) {
+                $query->where(['deleted_at' => null]);
+            }
+
+            if (!empty($condition)) {
+                $query->andWhere($condition);
+            }
+
+            $data =  yii\helpers\ArrayHelper::map($query->all(), $valueField, $textField, $groupField);
+
+            $dep = Yii::createObject([
+                'class' => '\yii\caching\DbDependency',
+                'sql' => "SELECT COUNT(*) FROM " . $this->tableName(),
+            ]);
+
+            Yii::$app->cache->set($key, $data, 24 * 3600, $dep);
         }
 
-        $sort = $this->hasAttribute('first_char') ? 'first_char' : $sort; //首字母排序优先
-        if (empty($groupField)) {
-            $groupField = $this->hasAttribute('first_char') ? 'first_char' : null;
-        }
-        //有首字母字段的，用于分组
-
-        $query = parent::find();
-        $query->orderBy($sort . ' ASC');
-
-        if ($this->hasAttribute('deleted_at')) {
-            $query->where(['deleted_at' => null]);
-        }
-
-        if (!empty($condition)) {
-            $query->andWhere($condition);
-        }
-
-        return yii\helpers\ArrayHelper::map($query->all(), $valueField, $textField, $groupField);
+        return $data;
     }
 
     public function getConstOptions($prefix, $except = [])

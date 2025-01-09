@@ -44,6 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'options'   => [
                 'style' => 'width: 55%'
             ],
+            'format'    => 'raw',
+            'value' => function ($model) {
+                return (strpos($model['name'], '*') === false ? '&nbsp;|-- ' : '') . $model['description'];
+            },
         ],
         [
             'attribute' => 'rule_name',
@@ -65,4 +69,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]) ?>
 
-<?php $this->endContent() ?>
+<?php $this->endContent();

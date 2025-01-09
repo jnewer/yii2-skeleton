@@ -145,7 +145,7 @@ class Generator extends \yii\gii\generators\crud\Generator
                 return "\$form->field(\$model, '$attribute')";
             }
         }
-        
+
         $column = $tableSchema->columns[$attribute];
         list($foreignKeyClassName, $fullForeignKeyClassName) = $this->getForeignKeyClassName($column->name);
         if ($column->type === 'integer' && $foreignKeyClassName) {
@@ -202,9 +202,9 @@ class Generator extends \yii\gii\generators\crud\Generator
         if ($column->phpType === 'boolean') {
             return "\$form->field(\$model, '$attribute', ['labelOptions'=>['class'=>'sr-only']])->checkbox()";
         } elseif ($column->type === 'string' && in_array(strtolower($column->name), $this->getConstsAttributes())) {
-            return "\$form->field(\$model, '$column->name', ['labelOptions'=>['class'=>'sr-only']])->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."'), ['prompt'=>'', 'data-placeholder'=>'不限{$column->comment}', 'class'=>'form-control select2', 'style'=>'width:120px'])";
-        }elseif (in_array($column->type, ['tinyint', 'smallint']) && in_array(strtolower($column->name), $this->getConstsAttributes())) {
-            return "\$form->field(\$model, '$column->name', ['labelOptions'=>['class'=>'sr-only']])->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."_'), ['prompt'=>'', 'data-placeholder'=>'不限{$column->comment}', 'class'=>'form-control select2', 'style'=>'width:120px'])";
+            return "\$form->field(\$model, '$column->name', ['labelOptions'=>['class'=>'sr-only']])->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."'), ['prompt'=>'', 'data-placeholder'=>'{$column->comment}', 'class'=>'form-control select2', 'style'=>'width:120px'])";
+        } elseif (in_array($column->phpType, ['integer']) && in_array(strtolower($column->name), $this->getConstsAttributes())) {
+            return "\$form->field(\$model, '$column->name', ['labelOptions'=>['class'=>'sr-only']])->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."_'), ['prompt'=>'', 'data-placeholder'=>'{$column->comment}', 'class'=>'form-control select2', 'style'=>'width:120px'])";
         } else {
             return "\$form->field(\$model, '$attribute', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'{$attributeLables[$attribute]}']])";
         }
