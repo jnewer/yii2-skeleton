@@ -7,14 +7,13 @@ use yii\log\FileTarget;
 
 class EFileTarget extends FileTarget
 {
-    public function export()
+    public function getMessagePrefix($message)
     {
-        if (Yii::$app->has('request') && ($requestId = Yii::$app->request->get('requestId'))) {
-            foreach ($this->messages as $i => $message) {
-                $this->messages[$i][] = ['requestId' => $requestId];
-            }
+        $message = parent::getMessagePrefix($message);
+        if (Yii::$app->has('request') && ($requestId =  Yii::$app->request->headers->get('X-Request-Id'))) {
+            $message.= "[$requestId]";
         }
 
-        parent::export();
+        return $message;
     }
 }

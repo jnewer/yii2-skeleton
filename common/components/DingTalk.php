@@ -50,6 +50,7 @@ class DingTalk
                 function ($exception) {
                 }
             );
+            $promise->wait();
         } catch (\Exception $e) {
         }
     }

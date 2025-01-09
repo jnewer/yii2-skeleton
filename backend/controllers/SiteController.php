@@ -12,6 +12,7 @@ use backend\models\LoginForm;
 use yii\filters\AccessControl;
 use common\components\rpc\Client;
 use common\models\PasswordModifyForm;
+use yii\base\UserException;
 
 /**
  * Site controller
@@ -34,7 +35,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'password', 'test-rpc'],
+                        'actions' => ['logout', 'index', 'password', 'test-rpc', 'test'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -183,5 +184,13 @@ class SiteController extends Controller
 
         var_export($result);
         die;
+    }
+
+    public function actionTest()
+    {
+        $requestId = str_replace('.', '', uniqid('req_', true));
+        Yii::$app->request->headers->set('X-Request-Id', $requestId);
+
+        throw new UserException('测试requestId');
     }
 }

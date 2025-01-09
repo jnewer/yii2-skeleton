@@ -67,7 +67,7 @@ return [
                     'maxLogFiles' => 30,
                 ],
                 'api' => [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => 'common\components\EFileTarget',
                     'levels' => ['error', 'warning', 'info', 'trace'],
                     'categories' => ['api', 'yii\base\UserException'],
                     'logVars' => ['_GET', '_POST', '_SESSION'],
@@ -104,7 +104,7 @@ return [
                     ],
                 ],
                 'debug' => [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => 'common\components\EFileTarget',
                     'levels' => ['error', 'warning', 'info', 'trace'],
                     'maxLogFiles' => 30,
                     'categories' => ['debug'],
@@ -113,7 +113,7 @@ return [
                     'maxLogFiles' => 30,
                 ],
                 'sql' => [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => 'common\components\EFileTarget',
                     'levels' => ['error', 'warning', 'info', 'trace'],
                     'categories' => ['yii\db\Command::execute', 'yii\db\Command::query'],
                     'logVars' => [],
