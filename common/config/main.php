@@ -55,7 +55,7 @@ return [
             'traceLevel' => 3,
             'targets' => [
                 'app' => [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => 'common\components\EFileTarget',
                     'levels' => ['error', 'warning', 'info'],
                     'logVars' => ['_GET', '_POST', '_SESSION'],
                     'except' => [
