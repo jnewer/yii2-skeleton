@@ -106,7 +106,7 @@ class Generator extends \yii\gii\generators\crud\Generator
     public function getForeignKeyClassName($attribute)
     {
         $suffix = substr($attribute, -3);
-        if ($suffix !== '_id') {
+        if ($suffix !== '_id' || in_array($attribute, ['parent_id'])) {
             return;
         }
         $attribute = substr($attribute, 0, strlen($attribute)-3);
