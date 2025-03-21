@@ -27,6 +27,7 @@ namespace <?= $generator->ns ?>;
 use Yii;
 use yii\behaviors\AttributeBehavior;
 use common\components\ActiveRecord;
+use backend\components\OperationLogBehavior;
 <?php if (isset($useDatetimeBehavior)) : ?>
 use common\components\behaviors\DatetimeBehavior;
 <?php endif; ?>
@@ -73,6 +74,7 @@ class <?= $className ?> extends ActiveRecord
     public function behaviors()
     {
         return [
+            OperationLogBehavior::class,
     <?php if (isset($useDatetimeBehavior)) : ?>
         DatetimeBehavior::class,
     <?php endif; ?>
