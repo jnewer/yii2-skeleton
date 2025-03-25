@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     protected $modelClass = User::class;
 
-    public static $parentActions = ['index', 'view'];
+    public static $parentActions = ['index'];
 
     /**
      * Creates a new User model.
@@ -41,7 +41,7 @@ class UserController extends Controller
             }
             $id = $model->id ? $model->id : $user->id;
 
-            return $this->redirect(['view', 'id' => $id]);
+            return $this->returnJson(true, '创建成功！');
         } else {
             $roles = \yii\helpers\ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
 
@@ -49,7 +49,7 @@ class UserController extends Controller
                 unset($roles['Admin']);
             }
 
-            return $this->render('create', [
+            return $this->renderAjax('ajax-form', [
                 'model' => $model,
                 'roles' => $roles,
             ]);
@@ -72,7 +72,8 @@ class UserController extends Controller
                 $model->setPassword($model->password);
             }
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            return $this->returnJson(true, '更新成功！');
         }
 
         $roles = \yii\helpers\ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
@@ -81,7 +82,7 @@ class UserController extends Controller
             unset($roles['Admin']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('ajax-form', [
             'model' => $model,
             'roles' => $roles
         ]);
@@ -112,5 +113,19 @@ class UserController extends Controller
         $model->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Displays a single User model.
+     *
+     * @desc 查看
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->renderAjax('ajax-view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 }

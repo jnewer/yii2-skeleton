@@ -206,4 +206,13 @@ class Controller extends BaseController
             'model' => $model,
         ]);
     }
+
+    public function returnJson(bool $success, string $message, array $data = [])
+    {
+        return $this->asJson([
+            'success' => $success,
+            'message' => $message,
+            'data' => $data,
+        ]);
+    }
 }

@@ -14,5 +14,6 @@ echo $form->field($generator, 'indexWidgetType')->dropDownList([
     'grid' => 'GridView',
     'list' => 'ListView',
 ]);
+echo $form->field($generator, 'viewMode')->radioList(['page' => 'Page', 'modal' => 'Modal']);
 echo $form->field($generator, 'enableI18N')->checkbox();
 echo $form->field($generator, 'messageCategory');

@@ -20,7 +20,7 @@ $dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize',
                 <!-- Check all button -->
                 <!-- <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button> -->
                 <div class="btn-group">
-                    <?= Html::a('<i class="fa fa-pencil-square-o"></i>', ['create'], ['class' => 'btn btn-primary btn-sm']) ?>
+                    <?= Html::a('<i class="fa fa-pencil-square-o"></i>', ['create'], ['class' => 'btn btn-primary btn-sm ajax-create']) ?>
                 </div>
                 <!-- /.btn-group -->
                 <a type="button" class="btn btn-default btn-sm" href="javascript:window.location.reload()"><i class="fa fa-refresh"></i></a>
@@ -73,11 +73,20 @@ $dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize',
                         'class' => 'backend\widgets\ActionColumn',
                         'header' => '操作',
                         'headerOptions' => ['style' => 'width:150px'],
+                        'template' => '{view} {update} {delete}',
                         'visibleButtons' => [
                             'delete' => function ($model, $key, $index) {
                                 return $model->id != Yii::$app->user->id;
                             },
                         ],
+                        'buttons' => [
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['class' => 'btn btn-default btn-sm ajax-view' , 'title' => '查看']);
+                            },
+                            'update' => function ($url, $model, $key) {
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['class' => 'btn btn-primary btn-sm ajax-update', 'title' => '更新']);
+                            }
+                        ]
                     ],
                 ],
             ]); ?>

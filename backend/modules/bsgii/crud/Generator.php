@@ -38,6 +38,7 @@ class Generator extends \yii\gii\generators\crud\Generator
     public $indexWidgetType = 'grid';
     public $searchModelClass = '';
     public $foreignKeyClassNames = [];
+    public $viewMode = 'page';
 
     /**
      * @inheritdoc
@@ -58,11 +59,45 @@ class Generator extends \yii\gii\generators\crud\Generator
 
     public function generate()
     {
-        $tableSchema = $this->getTableSchema();
-        foreach ($tableSchema->columns as $column) {
-            $this->getForeignKeyClassName($column->name);
+        // $tableSchema = $this->getTableSchema();
+        // foreach ($tableSchema->columns as $column) {
+        //     $this->getForeignKeyClassName($column->name);
+        // }
+        // return parent::generate();
+
+
+        $controllerFile = Yii::getAlias('@' . str_replace('\\', '/', ltrim($this->controllerClass, '\\')) . '.php');
+
+        $files = [
+            new CodeFile($controllerFile, $this->render('controller.php')),
+        ];
+
+        if (!empty($this->searchModelClass)) {
+            $searchModel = Yii::getAlias('@' . str_replace('\\', '/', ltrim($this->searchModelClass, '\\') . '.php'));
+            $files[] = new CodeFile($searchModel, $this->render('search.php'));
         }
-        return parent::generate();
+
+        $viewPath = $this->getViewPath();
+        $templatePath = $this->getTemplatePath() . '/views';
+        foreach (scandir($templatePath) as $file) {
+            if (empty($this->searchModelClass) && $file === '_search.php') {
+                continue;
+            }
+
+            // var_dump($this->viewMode);die;
+
+            if ($this->viewMode === 'modal' && strpos($file, 'ajax-') === false && $file !== '_search.php') {
+                continue;
+            } elseif ($this->viewMode === 'page' && strpos($file, 'ajax-') !== false) {
+                continue;
+            }
+
+            if (is_file($templatePath . '/' . $file) && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+                $files[] = new CodeFile("$viewPath/$file", $this->render("views/$file"));
+            }
+        }
+
+        return $files;
     }
 
     /**
@@ -244,5 +279,28 @@ class Generator extends \yii\gii\generators\crud\Generator
                 return "'$attribute' => ['type'=>$input, 'options'=>['maxlength' => true, 'placeholder'=>'']],";
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return array_merge(parent::rules(), [
+            [['controllerClass', 'modelClass', 'searchModelClass', 'baseControllerClass'], 'trim', 'chars' => '\ '],
+            [['modelClass', 'controllerClass', 'baseControllerClass', 'indexWidgetType'], 'required'],
+            [['searchModelClass'], 'compare', 'compareAttribute' => 'modelClass', 'operator' => '!==', 'message' => 'Search Model Class must not be equal to Model Class.'],
+            [['modelClass', 'controllerClass', 'baseControllerClass', 'searchModelClass'], 'match', 'pattern' => '/^[\w\\\\]*$/', 'message' => 'Only word characters and backslashes are allowed.'],
+            ['modelClass', 'validateClass', 'params' => ['extends' => BaseActiveRecord::class]],
+            [['baseControllerClass'], 'validateClass', 'params' => ['extends' => Controller::class]],
+            [['controllerClass'], 'match', 'pattern' => '/Controller$/', 'message' => 'Controller class name must be suffixed with "Controller".'],
+            [['controllerClass'], 'match', 'pattern' => '/(^|\\\\)[A-Z][^\\\\]+Controller$/', 'message' => 'Controller class name must start with an uppercase letter.'],
+            [['controllerClass', 'searchModelClass'], 'validateNewClass'],
+            ['indexWidgetType', 'in', 'range' => ['grid', 'list']],
+            ['modelClass', 'validateModelClass'],
+            [['enableI18N', 'enablePjax'], 'boolean'],
+            ['messageCategory', 'validateMessageCategory', 'skipOnEmpty' => false],
+            [['viewPath', 'viewMode'], 'safe'],
+        ]);
     }
 }
