@@ -78,7 +78,9 @@ if (Yii::$app->controller->action->id === 'login') {
 
 <script>
     // 获取当前登录用户名
-    var username = '<?= Yii::$app->user->identity->username ?>';
+    var username = '<?php echo Yii::$app->user->identity->username; ?>';
+    var watermarkEnabled = '<?php echo app()->config->get('watermark_enabled') ?? 0; ?>';
+    console.log('watermarkEnabled:'+ watermarkEnabled);
 
     // 创建水印函数
     function createWatermark(text) {
@@ -114,7 +116,7 @@ if (Yii::$app->controller->action->id === 'login') {
             y += lineHeight; // 移动到下一行位置
         }
     }
-
-    // 创建包含用户名的多排水印
-    createMultipleWatermarks(username);
+    if (watermarkEnabled > 0) {
+        createMultipleWatermarks(username);
+    }
 </script>

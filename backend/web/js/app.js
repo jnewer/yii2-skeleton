@@ -164,7 +164,7 @@ $(function () {
                 title: title ? title : '查看',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['50%', '40%'],
+                area: ['50%', '50%'],
                 content: content,
                 // btn: ['关闭'],
                 // yes: function (index, layero) {

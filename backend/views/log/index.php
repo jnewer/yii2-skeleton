@@ -70,6 +70,11 @@ $dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize',
                         'headerOptions' => ['style' => 'width:150px'],
                         'buttonOptions' => ['class' => 'btn btn-default btn-sm'],
                         'template' => '{view}',
+                        'buttons' => [
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['class' => 'btn btn-default btn-sm ajax-view' , 'title' => '查看']);
+                            },
+                        ]
                     ],
                 ],
             ]); ?>

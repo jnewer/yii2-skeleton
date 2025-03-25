@@ -2,6 +2,8 @@
 
 
 use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Html;
+
 ?>
 <?php $form = ActiveForm::begin([
     'options' => ['class' => 'form-horizontal', 'enctype' => 'multipart/form-data'],
@@ -14,31 +16,42 @@ use yii\bootstrap\ActiveForm;
 <div class="form-group">
     <label class="col-lg-3 control-label">网站名称</label>
     <div class="col-lg-9">
-        <input type="text" name="site_name" class="form-control" value="<?php echo $config['site_name'] ?? '' ?>">
+        <input type="text" name="site_name" class="form-control"
+            value="<?php echo $config['site_name'] ?? '' ?>">
     </div>
 </div>
 <div class="form-group">
     <label class="col-lg-3 control-label">网站关键字</label>
     <div class="col-lg-9">
-        <input type="text" name="site_keywords" class="form-control" value="<?php echo $config['site_keywords'] ?? '' ?>">
+        <input type="text" name="site_keywords" class="form-control"
+            value="<?php echo $config['site_keywords'] ?? '' ?>">
     </div>
 </div>
 <div class="form-group">
     <label class="col-lg-3 control-label">网站描述</label>
     <div class="col-lg-9">
-        <input type="text" name="site_desc" class="form-control" value="<?php echo $config['site_desc'] ?? '' ?>">
+        <input type="text" name="site_desc" class="form-control"
+            value="<?php echo $config['site_desc'] ?? '' ?>">
     </div>
 </div>
 <div class="form-group">
     <label class="col-lg-3 control-label">版权信息</label>
     <div class="col-lg-9">
-        <input type="text" name="site_copyright" class="form-control" value="<?php echo $config['site_copyright'] ?? '' ?>">
+        <input type="text" name="site_copyright" class="form-control"
+            value="<?php echo $config['site_copyright'] ?? '' ?>">
     </div>
 </div>
 <div class="form-group">
     <label class="col-lg-3 control-label">网站备案号</label>
     <div class="col-lg-9">
-        <input type="text" name="site_record_number" class="form-control" value="<?php echo $config['site_record_number'] ?? '' ?>">
+        <input type="text" name="site_record_number" class="form-control"
+            value="<?php echo $config['site_record_number'] ?? '' ?>">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-lg-3 control-label">是否开启水印</label>
+    <div class="col-lg-9">
+        <?php echo Html::radioList('watermark_enabled', $config['watermark_enabled'] ?? 0, [0 => '否', 1 => '是'], ['itemOptions'=>['class'=>'minimal']]);?>
     </div>
 </div>
 <div class="form-group">
