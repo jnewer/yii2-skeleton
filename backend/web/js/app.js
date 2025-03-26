@@ -1,6 +1,6 @@
-$(function () {
+$(function() {
     // 替换yii2默认的js对话框
-    yii.confirm = function (message, ok, cancel) {
+    yii.confirm = function(message, ok, cancel) {
         // swal({
         //     title: message,
         //     text: null,
@@ -21,10 +21,10 @@ $(function () {
             title: '删除确认',
             icon: 3,
             btn: ['确定', '取消'] //按钮
-        }, function (index) {
+        }, function(index) {
             layer.close(index);
             ok();
-        }, function (index) {
+        }, function(index) {
             layer.close(index);
             cancel();
         });
@@ -56,18 +56,18 @@ $(function () {
     $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' });
     //Date range as a button
     $('#daterange-btn').daterangepicker({
-        ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment()
         },
-        startDate: moment().subtract(29, 'days'),
-        endDate: moment()
-    },
-        function (start, end) {
+        function(start, end) {
             $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         }
     );
@@ -109,69 +109,5 @@ $(function () {
     //Timepicker
     $(".timepicker").timepicker({
         showInputs: false
-    });
-
-    $('a.ajax-create, a.ajax-update').click(function (e) {
-        var title = $(this).attr('title');
-        $.get($(this).attr('href'), function (content) {
-            layer.open({
-                type: 1,
-                title: title ? title : '编辑',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['60%', '50%'],
-                content: content,
-                btn: ['保存', '取消'],
-                yes: function (index, layero) {
-                    var form = layero[0].getElementsByTagName('form')[0];
-                    var data = new FormData(form);
-                    console.log(data.toString());
-                    $.ajax({
-                        url: form.getAttribute('action'),
-                        type: 'POST',
-                        data: data,
-                        async: false,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-                            console.log(data);
-                            if (data.success) {
-                                layer.close(index);
-                                layer.msg(data.message);
-                                window.location.reload();
-                            } else {
-                                layer.alert(data.message);
-                            }
-                        },
-                        error: function (data) {
-                            console.log(data);
-                            layer.alert(data.message);
-                        }
-                    });
-                }
-            });
-        });
-        return false;
-    });
-
-
-    $('a.ajax-view').click(function (e) {
-        var title = $(this).attr('title');
-        $.get($(this).attr('href'), function (content) {
-            layer.open({
-                type: 1,
-                title: title ? title : '查看',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['50%', '50%'],
-                content: content,
-                // btn: ['关闭'],
-                // yes: function (index, layero) {
-                //     layer.close(index);
-                // }
-            });
-        });
-        return false;
     });
 });
