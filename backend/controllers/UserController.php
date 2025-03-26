@@ -28,6 +28,7 @@ class UserController extends Controller
         $model = new User();
 
         if ($model->load(Yii::$app->request->post())) {
+            $model->uploadImages(['avatar']);
             $user = User::findByUsername($model->username);
             if (!$user) {
                 $model->setPassword($model->password);
@@ -68,6 +69,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
+            $model->uploadImages(['avatar']);
             if ($model->password) {
                 $model->setPassword($model->password);
             }

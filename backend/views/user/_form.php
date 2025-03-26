@@ -12,7 +12,7 @@ use kartik\password\PasswordInput;
 
 <div class="box-body">
     <?php $form = ActiveForm::begin([
-        'options' => ['class' => 'form-horizontal'],
+        'options' => ['class' => 'form-horizontal', 'enctype' => 'multipart/form-data'],
         'fieldConfig' => [
             'template' => "{label}\n<div class=\"col-sm-10\">{input}\n{hint}\n{error}</div>",
             'labelOptions' => ['class' => 'col-sm-2 control-label'],
@@ -38,6 +38,7 @@ use kartik\password\PasswordInput;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'roles')->dropdownList($roles, ['prompt' => '', 'data-placeholder' => '角色', 'class' => 'form-control select2', 'style' => 'width:100%']) ?>
     <?= $form->field($model, 'status')->dropdownList(User::$statusMap, ['prompt' => '', 'data-placeholder' => '状态', 'class' => 'form-control select2', 'style' => 'width:100%']) ?>
+    <?= $form->field($model, 'avatar')->widget(backend\widgets\FileInput::class)->hint('支持JPG、JPEG、PNG格式，不要超过500KB为宜'); ?>
     <div class="box-footer">
         <a href="javascript:history.back();" class="btn btn-default">取消</a>
         <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success pull-right' : 'btn btn-primary pull-right']) ?>

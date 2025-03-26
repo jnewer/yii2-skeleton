@@ -1,11 +1,23 @@
+<style>
+.user-panel>.image>img {
+    width: 100%;
+    max-width: 45px;
+    height: 45px;
+}
+</style>
 <aside class="main-sidebar">
 
     <section class="sidebar">
 
         <!-- Sidebar user panel -->
         <div class="user-panel">
+
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                <?php if (Yii::$app->user->identity->avatar) : ?>
+                    <img src="<?php echo Yii::$app->user->identity->avatar; ?>" class="img-circle" alt="User Image" />
+                <?php else : ?>
+                    <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                <?php endif; ?>
             </div>
             <div class="pull-left info">
                 <p><?php echo Yii::$app->user->identity->username ?></p>

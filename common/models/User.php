@@ -21,6 +21,7 @@ use common\components\behaviors\DatetimeBehavior;
  * @property string $password_reset_token [varchar(64)] 密码重置TOKEN
  * @property string $email [varchar(32)] 邮箱
  * @property integer $status [smallint(1)] 状态
+ * @property integer $avatar [varchar(255)] 头像
  * @property integer $created_at [datetime] 创建时间
  * @property integer $updated_at [datetime] 更新时间
  *
@@ -73,6 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['status'], 'integer'],
             [['password_hash', 'password_reset_token'], 'string', 'max' => 64],
             [['username','nickname', 'email','auth_key'], 'string', 'max' => 32],
+            [['avatar'], 'string', 'max' => 255],
             [['username'], 'unique'],
             [['email'], 'email'],
             [['email'], 'unique'],
@@ -100,6 +102,7 @@ class User extends ActiveRecord implements IdentityInterface
             'roles' => '系统角色',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
+            'avatar' => '头像',
         ];
     }
 

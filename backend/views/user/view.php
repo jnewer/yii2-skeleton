@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     }
                 ],
+                ['attribute' => 'avatar', 'format' => 'raw', 'value' => Yii::$app->formatter->asImage($model->avatar, ['height' => 200])],
                 'created_at',
                 'updated_at',
             ],

@@ -30,9 +30,13 @@ $siteName = Yii::$app->config->get('site_name') ?: Yii::$app->name;
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header" style="height:auto">
-                            <i class="fa fa-user fa-5x" aria-hidden="true" style="color:white"></i>
-                            <!-- <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                 alt="User Image"/> -->
+                            <!-- <i class="fa fa-user fa-5x" aria-hidden="true" style="color:white"></i> -->
+                            <?php if (Yii::$app->user->identity->avatar) : ?>
+                                <img src="<?php echo Yii::$app->user->identity->avatar; ?>" class="img-circle" alt="User Image" />
+                            <?php else : ?>
+                                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
+                                    alt="User Image" />
+                            <?php endif; ?>
 
                             <p>
                                 <?php echo Yii::$app->user->identity->username ?> - <?php echo Yii::$app->user->identity->roleNames ?>

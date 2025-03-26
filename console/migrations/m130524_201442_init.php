@@ -22,6 +22,7 @@ class m130524_201442_init extends Migration
             'access_token' => $this->string(64)->unique()->comment('ACCESS TOKEN'),
             'email' => $this->string(32)->notNull()->unique()->comment('邮箱'),
             'status' => $this->tinyInteger(1)->notNull()->unsigned()->defaultValue(10)->comment('状态'),
+            'avatar' => $this->string(255)->notNull()->defaultValue('')->comment('头像'),
             'created_at' => $this->dateTime()->notNull()->comment('创建时间'),
             'updated_at' => $this->dateTime()->notNull()->comment('更新时间'),
         ], $tableOptions);
