@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Html;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
@@ -59,6 +60,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'header' => '操作',
                         'buttonOptions' => ['class' => 'btn btn-default btn-sm'],
                         'template' => '{view}',
+                        'buttons' => [
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['class' => 'btn btn-default btn-sm ajax-view', 'title' => '查看']);
+                            },
+                        ]
                     ],
                 ],
             ]); ?>
