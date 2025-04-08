@@ -9,42 +9,34 @@ use Yii;
 class HealthCheckController extends Controller
 {
     /**
-     * Health check action to check if the API service and its dependencies are running properly.
      * @return Response
      */
     public function actionIndex()
     {
-        // Set the response format to JSON
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $status = 'ok';
-        $message = 'API service is running properly.';
         $issues = [];
 
-        // Check database connection
         try {
             Yii::$app->db->open();
             Yii::$app->db->close();
         } catch (\Exception $e) {
-            $status = 'error';
             $issues[] = 'Database connection failed: ' . $e->getMessage();
         }
 
-        // Check Redis connection
         try {
-            Yii::$app->redis->executeCommand('PING');
+            Yii::$app->redis->ping();
         } catch (\Exception $e) {
-            $status = 'error';
             $issues[] = 'Redis connection failed: ' . $e->getMessage();
         }
 
-        // Prepare the response
+        $isOk = empty($issues);
         $response = [
-            'status' => $status,
-            'message' => $message,
+            'status' => $isOk ? 'ok' : 'error',
+            'message' => $isOk ? 'API service is running properly.' : 'There are issues with the API service.',
         ];
 
-        if (!empty($issues)) {
+        if (!$isOk) {
             $response['issues'] = $issues;
         }
 
