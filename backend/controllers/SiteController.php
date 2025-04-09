@@ -73,6 +73,7 @@ class SiteController extends Controller
                 'minLength' => 4,
                 'foreColor' => 0x333333,
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'offset' => 3,
             ],
         ];
     }
@@ -137,7 +138,7 @@ class SiteController extends Controller
      */
     public function actionPassword()
     {
-        $model = new PasswordModifyForm;
+        $model = new PasswordModifyForm();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
