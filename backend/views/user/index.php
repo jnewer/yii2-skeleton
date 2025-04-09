@@ -75,7 +75,7 @@ $dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize',
                         'headerOptions' => ['style' => 'width:150px'],
                         'visibleButtons' => [
                             'delete' => function ($model, $key, $index) {
-                                return $model->id != Yii::$app->user->id;
+                                return $model->id != Yii::$app->user->id && $model->username != 'admin';
                             },
                         ],
                     ],
