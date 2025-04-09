@@ -19,6 +19,9 @@ if (array_key_exists('created_at', $labels) || array_key_exists('updated_at', $l
 if (array_key_exists('created_by', $labels) || array_key_exists('updated_by', $labels)) {
     $useBlameableBehavior = true;
 }
+if (array_key_exists('deleted_at', $labels)) {
+    $useSoftDeleteBehavior = true;
+}
 echo "<?php\n";
 ?>
 
@@ -32,7 +35,11 @@ use common\components\behaviors\OperationLogBehavior;
 use common\components\behaviors\DatetimeBehavior;
 <?php endif; ?>
 <?php if (isset($useBlameableBehavior)) : ?>
-use yii\behaviors\BlameableBehavior;
+use common\components\behaviors\BlameableBehavior;
+<?php endif; ?>
+<?php if (isset($useSoftDeleteBehavior)) : ?>
+use common\components\behaviors\SoftDeleteBehavior;
+use common\components\behaviors\SoftDeleteQueryBehavior;
 <?php endif; ?>
 
 /**
@@ -70,7 +77,6 @@ class <?= $className ?> extends ActiveRecord
     }
 
 <?php endif; ?>
-<?php if (isset($useDatetimeBehavior) || isset($useBlameableBehavior)) : ?>
     public function behaviors()
     {
         return [
@@ -80,10 +86,12 @@ class <?= $className ?> extends ActiveRecord
     <?php endif; ?>
     <?php if (isset($useBlameableBehavior)) : ?>
         BlameableBehavior::class,
-    <?php endif; ?>];
+    <?php endif; ?>
+    <?php if (isset($useSoftDeleteBehavior)) : ?>
+        SoftDeleteBehavior::class,
+        SoftDeleteQueryBehavior::class,
+    <?php endif; ?>];  
     }
-
-<?php endif; ?>
     /**
      * @inheritdoc
      */
