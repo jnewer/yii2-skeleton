@@ -27,7 +27,7 @@ namespace <?= $generator->ns ?>;
 use Yii;
 use yii\behaviors\AttributeBehavior;
 use common\components\ActiveRecord;
-use backend\components\OperationLogBehavior;
+use common\components\behaviors\OperationLogBehavior;
 <?php if (isset($useDatetimeBehavior)) : ?>
 use common\components\behaviors\DatetimeBehavior;
 <?php endif; ?>

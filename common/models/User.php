@@ -7,7 +7,7 @@ use yii\web\IdentityInterface;
 use common\components\ActiveRecord;
 use yii\base\NotSupportedException;
 use kartik\password\StrengthValidator;
-use backend\components\OperationLogBehavior;
+use common\components\behaviors\OperationLogBehavior;
 use common\components\behaviors\DatetimeBehavior;
 
 /**

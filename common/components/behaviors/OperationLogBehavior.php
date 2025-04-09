@@ -1,7 +1,7 @@
 <?php
 
 
-namespace backend\components;
+namespace common\components\behaviors;
 
 use Yii;
 use yii\helpers\Json;

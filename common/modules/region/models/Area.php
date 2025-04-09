@@ -5,7 +5,7 @@ namespace common\modules\region\models;
 use Yii;
 use common\components\ActiveRecord;
 use yii\behaviors\AttributeBehavior;
-use backend\components\OperationLogBehavior;
+use common\components\behaviors\OperationLogBehavior;
 
 /**
  * This is the model class for table "area".
