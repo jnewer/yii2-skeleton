@@ -37,6 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'options'   => [
                 'style' => 'width: 20%'
             ],
+            'format'    => 'raw',
+            'value' => function ($model) {
+                return (strpos($model['name'], '*') === false ? '&nbsp;|-- ' : '') . $model['name'];
+            },
         ],
         [
             'attribute' => 'description',

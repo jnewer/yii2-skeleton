@@ -57,12 +57,20 @@ Yii::$app->params['role_children'] = $model->children;
                 'attribute' => 'name',
                 'header'    => '名称',
                 'options'   => [
-                    'style' => 'width: 20%'
+                    'style' => 'width: 30%'
                 ],
+                'format'    => 'raw',
+                'value' => function ($model) {
+                    return (strpos($model['name'], '*') === false ? '&nbsp;|-- ' : '') . $model['name'];
+                },
             ],
             [
                 'attribute' => 'description',
                 'header'    => '描述',
+                'format'    => 'raw',
+                'value' => function ($model) {
+                    return (strpos($model['name'], '*') === false ? '&nbsp;|-- ' : '') . $model['description'];
+                },
             ],
         ],
     ]) ?>

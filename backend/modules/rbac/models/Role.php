@@ -4,6 +4,7 @@ namespace backend\modules\rbac\models;
 
 use yii\data\ArrayDataProvider;
 use dektrium\rbac\models\Role as BaseRole;
+use yii\rbac\Item;
 
 class Role extends BaseRole
 {
@@ -22,5 +23,16 @@ class Role extends BaseRole
             ],
             'pagination' => false,
         ]);
+    }
+
+    /**
+     * Formats name.
+     *
+     * @param  Item $item
+     * @return string
+     */
+    protected function formatName(Item $item)
+    {
+        return $item->description ?: $item->name;
     }
 }
