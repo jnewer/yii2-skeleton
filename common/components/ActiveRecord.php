@@ -127,18 +127,19 @@ class ActiveRecord extends BaseActiveRecord
      * @param  array  $attributes 文件上传属性
      * @return void
      */
-    public function uploadFiles(array $attributes, $extensions = [])
+    public function uploadFiles(array $attributes, $extensions = [], $dirPrefix = '', $maxSize = 1024 * 1024)
     {
         $className = explode('\\', get_class($this));
         $className = array_pop($className);
 
-        $extensions = $extensions ? $extensions : get_config('upload_allow_file', []);
-        $validator = new FileValidator(['skipOnEmpty' => true, 'extensions' => $extensions]);
+        $extensions = $extensions ? $extensions : get_config('upload_allow_file_ext', []);
+        $maxSize = $maxSize ? $maxSize : get_config('upload_allow_file_size', 1024 * 1024);
+        $validator = new FileValidator(['skipOnEmpty' => true, 'extensions' => $extensions,'maxSize' => $maxSize, 'tooBig' => '文件体积过大，不能超过{formattedLimit}.']);
         foreach ($attributes as $attribute) {
             $file = UploadedFile::getInstance($this, $attribute);
             if ($file && $validator->validate($file, $error)) {
                 $filename = time() . rand(1000, 9999) . '.' . $file->getExtension();
-                $dir = '/upload/' . strtolower($className) . '/' . $attribute . '/' . date('Ym') . '/';
+                $dir = ($dirPrefix ? $dirPrefix : '/upload/' . strtolower($className) . '/' . $attribute) . '/' . date('Ym') . '/';
                 FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir, 755, true);
 
                 $filepath = Yii::getAlias('@webroot' . $dir . $filename);
@@ -155,8 +156,9 @@ class ActiveRecord extends BaseActiveRecord
     {
         $className = explode('\\', get_class($this));
         $className = array_pop($className);
-        $extensions = $extensions ? $extensions : get_config('upload_allow_image', []);
-        $validator = new ImageValidator(['skipOnEmpty' => true, 'extensions' => $extensions, 'maxSize' => $maxSize, 'tooBig' => '图片文件体积过大，不能超过{formattedLimit}.']);
+        $extensions = $extensions ? $extensions : get_config('upload_allow_image_ext', []);
+        $maxSize = $maxSize ? $maxSize : get_config('upload_allow_image_size', 1024 * 1024);
+        $validator = new ImageValidator(['skipOnEmpty' => true, 'extensions' => $extensions, 'maxSize' => $maxSize, 'tooBig' => '图片体积过大，不能超过{formattedLimit}.']);
         foreach ($attributes as $attribute) {
             $file = UploadedFile::getInstance($this, $attribute);
             if ($file !== null) {
