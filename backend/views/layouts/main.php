@@ -78,7 +78,7 @@ if (Yii::$app->controller->action->id === 'login') {
 
 <script>
     // 获取当前登录用户名
-    var username = '<?php echo Yii::$app->user->identity->username; ?>';
+    var username = '<?php echo !Yii::$app->user->isGuest ? Yii::$app->user->identity->username : ''; ?>';
     var watermarkEnabled = '<?php echo app()->config->get('watermark_enabled') ?? 0; ?>';
     console.log('watermarkEnabled:'+ watermarkEnabled);
 

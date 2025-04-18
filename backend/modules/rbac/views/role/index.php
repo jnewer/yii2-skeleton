@@ -62,6 +62,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'options' => [
                 'style' => 'width: 5%'
             ],
+            'visibleButtons' => [
+                'delete' => function ($model, $key, $index) {
+                    return $model['name'] != 'Admin';
+                },
+            ],
         ]
     ],
 ]) ?>

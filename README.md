@@ -55,7 +55,7 @@ php yii seed/create-admin
 #### 配置开发工具
 
 ```php
-// common/config/main-local.php
+// backend/config/main-local.php
 if (YII_ENV === 'dev') {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
