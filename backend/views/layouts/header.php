@@ -10,7 +10,7 @@ $siteName = Yii::$app->config->get('site_name') ?: Yii::$app->name;
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">AXB</span><span class="logo-lg">' . $siteName . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini">YA</span><span class="logo-lg">' . $siteName . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
