@@ -8,6 +8,8 @@ use yii\web\Application;
 
 class RequestIdBehavior extends Behavior
 {
+    public const HEADER_REQUEST_ID = 'X-Request-Id';
+
     public function events()
     {
         return [
@@ -18,10 +20,22 @@ class RequestIdBehavior extends Behavior
     public function setRequestId($event)
     {
         try {
-            $requestId = str_replace('.', '', uniqid('req_', true));
-            Yii::$app->request->headers->set('X-Request-Id', $requestId);
-        } catch (\Exception $e) {
-            Yii::error("设置请求ID时发生错误: " . $e->getMessage(), __METHOD__);
+            $headers = Yii::$app->getRequest()->getHeaders();
+            if (!$headers->has(self::HEADER_REQUEST_ID)) {
+                $requestId = bin2hex(random_bytes(16));
+            } else {
+                $requestId = $headers->get(self::HEADER_REQUEST_ID);
+            }
+            Yii::$app->params[self::HEADER_REQUEST_ID] = $requestId;
+        } catch (\Throwable $t) {
+            Yii::error([
+                'message' => "设置请求ID时发生错误",
+                self::HEADER_REQUEST_ID => $this->getRequestIdFromParamsOrHeader(),
+                'error' => $t->getMessage(),
+                'exception' => get_class($t),
+                'file' => $t->getFile(),
+                'line' => $t->getLine(),
+            ], __METHOD__);
         }
     }
 }
