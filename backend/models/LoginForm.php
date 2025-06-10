@@ -28,6 +28,7 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],
             ['verifyCode', 'captcha'],
+            ['username', 'checkLoginLimit'],
         ];
     }
 
@@ -87,5 +88,55 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+
+    /**
+     * 检查登录频率限制
+     *
+     * @param $username
+     * @return void
+     * @throws BusinessException
+     */
+    protected function checkLoginLimit($attribute)
+    {
+        $username = $this->username;
+        $limitLoginPath = runtime_path() . '/login';
+        if (!is_dir($limitLoginPath)) {
+            mkdir($limitLoginPath, 0777, true);
+        }
+        $limitFile = $limitLoginPath . '/' . md5($username) . '.limit';
+        $time = date('YmdH') . ceil(date('i') / 5);
+        $limitInfo = [];
+        if (is_file($limitFile)) {
+            $jsonStr = file_get_contents($limitFile);
+            $limitInfo = json_decode($jsonStr, true);
+        }
+
+        if (!$limitInfo || $limitInfo['time'] != $time) {
+            $limitInfo = [
+                'username' => $username,
+                'count' => 0,
+                'time' => $time
+            ];
+        }
+        $limitInfo['count']++;
+        file_put_contents($limitFile, json_encode($limitInfo));
+        if ($limitInfo['count'] >= 5) {
+            $this->addError($attribute, '登录失败次数过多，请5分钟后再试');
+        }
+    }
+
+    /**
+     * 解除登录频率限制
+     * @param $username
+     * @return void
+     */
+    protected function removeLoginLimit()
+    {
+        $limitLoginPath = runtime_path() . '/login';
+        $limitFile = $limitLoginPath . '/' . md5($this->username) . '.limit';
+        if (is_file($limitFile)) {
+            unlink($limitFile);
+        }
     }
 }
