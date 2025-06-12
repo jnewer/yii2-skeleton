@@ -304,7 +304,7 @@ if (!function_exists('runtime_path')) {
      */
     function runtime_path()
     {
-        return app()->runtime_path;
+        return app()->runtimePath;
     }
 }
 

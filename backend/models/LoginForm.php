@@ -97,7 +97,7 @@ class LoginForm extends Model
      * @return void
      * @throws BusinessException
      */
-    protected function checkLoginLimit($attribute)
+    public function checkLoginLimit($attribute)
     {
         $username = $this->username;
         $limitLoginPath = runtime_path() . '/login';
@@ -131,7 +131,7 @@ class LoginForm extends Model
      * @param $username
      * @return void
      */
-    protected function removeLoginLimit()
+    public function removeLoginLimit()
     {
         $limitLoginPath = runtime_path() . '/login';
         $limitFile = $limitLoginPath . '/' . md5($this->username) . '.limit';
