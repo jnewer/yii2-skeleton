@@ -111,8 +111,6 @@ class SiteController extends Controller
             $log->created_at = date('Y-m-d H:i:s');
             $log->save();
 
-            $model->removeLoginLimit();
-
             return $this->goBack();
         }
 
