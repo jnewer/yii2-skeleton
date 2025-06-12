@@ -31,7 +31,7 @@ class __Application
 }
 
 /**
- * @property common\models\User $identity
+ * @property backend\components\User|common\models\User $identity
  */
 class __WebUser
 {

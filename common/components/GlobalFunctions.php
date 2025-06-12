@@ -325,7 +325,7 @@ if (!function_exists('is_admin')) {
      */
     function is_admin()
     {
-        return user()->getis_admin();
+        return user()->getIsAdmin();
     }
 }
 
