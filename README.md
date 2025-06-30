@@ -81,7 +81,7 @@ if (YII_ENV === 'dev') {
 ##### 启动后台服务
 
 ```
-php yii serve --port=8080
+php yii serve --port=8080 --docroot=backend/web
 ```
 
 ##### 启动API服务
@@ -96,6 +96,3 @@ php yii serve --port=8081 --docroot=api/web
 
 - 在获取可添加的权限时，如果当前类继承了父类，默认会获取父类所有 `action` 的权限。可以通过指定变量 `parentActions` 的值来控制，例如 `public static $parentActions = ['index', 'view'];`，这样只会获取父类中指定的这些方法的权限。
 
-#### 街道数据
-
-- 需要将database/street.sql导入到数据库中。
