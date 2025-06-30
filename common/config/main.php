@@ -132,9 +132,5 @@ return [
             'redis' => 'redis',
         ],
     ],
-    'modules' => [
-        'region' => [
-            'class' => 'backend\modules\region\Module',
-        ],
-    ]
+    'modules' => []
 ];
