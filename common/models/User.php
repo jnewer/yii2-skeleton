@@ -37,7 +37,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static $statusMap = [
         self::STATUS_ACTIVE => '正常',
-        self::STATUS_INACTIVE => '禁用',
+        self::STATUS_INACTIVE => '停用',
     ];
 
     public $password;

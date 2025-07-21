@@ -21,6 +21,9 @@ return [
         'v1' => [
             'class' => 'api\modules\v1\Module',
         ],
+        'cms' => [
+            'class' => 'api\modules\cms\Module',
+        ],
     ],
     'components' => [
         'user' => [

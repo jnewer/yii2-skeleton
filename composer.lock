@@ -4,30 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "457f80fa9b370c69b8230f92f1c51b89",
+    "content-hash": "42ec1c46d89c4082b202ec4d52aa3c2e",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
-            "version": "2.2.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/2amigos/yii2-ckeditor-widget.git",
-                "reference": "77812cafc6f1d3dd43ee0f581f8a431d0d4f8227"
+                "reference": "248e671faf7ec1e6affbcc6554d991095139d379"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-ckeditor-widget/zipball/77812cafc6f1d3dd43ee0f581f8a431d0d4f8227",
-                "reference": "77812cafc6f1d3dd43ee0f581f8a431d0d4f8227",
+                "url": "https://api.github.com/repos/2amigos/yii2-ckeditor-widget/zipball/248e671faf7ec1e6affbcc6554d991095139d379",
+                "reference": "248e671faf7ec1e6affbcc6554d991095139d379",
                 "shasum": ""
             },
             "require": {
-                "ckeditor/ckeditor": "^4.7",
-                "sunhater/kcfinder": "*",
+                "ckeditor/ckeditor": "dev-full/4.7.x",
                 "yiisoft/yii2": "^2.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*",
-                "roave/security-advisories": "dev-master"
+                "phpunit/phpunit": "4.*"
             },
             "type": "yii2-extension",
             "extra": {
@@ -68,7 +66,7 @@
                 "source": "https://github.com/2amigos/yii2-ckeditor-widget"
             },
             "abandoned": true,
-            "time": "2019-04-06T16:44:11+00:00"
+            "time": "2017-07-22T15:38:16+00:00"
         },
         {
             "name": "abhi1693/yii2-config",
@@ -275,16 +273,16 @@
         },
         {
             "name": "caseyamcl/guzzle_retry_middleware",
-            "version": "v2.12.1",
+            "version": "v2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caseyamcl/guzzle_retry_middleware.git",
-                "reference": "362bdd5e6d19e54e1f4c8c27757e7598201efa3c"
+                "reference": "17c9299cde438b00bbeb099c6480319a81636a60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caseyamcl/guzzle_retry_middleware/zipball/362bdd5e6d19e54e1f4c8c27757e7598201efa3c",
-                "reference": "362bdd5e6d19e54e1f4c8c27757e7598201efa3c",
+                "url": "https://api.github.com/repos/caseyamcl/guzzle_retry_middleware/zipball/17c9299cde438b00bbeb099c6480319a81636a60",
+                "reference": "17c9299cde438b00bbeb099c6480319a81636a60",
                 "shasum": ""
             },
             "require": {
@@ -336,7 +334,7 @@
             ],
             "support": {
                 "issues": "https://github.com/caseyamcl/guzzle_retry_middleware/issues",
-                "source": "https://github.com/caseyamcl/guzzle_retry_middleware/tree/v2.12.1"
+                "source": "https://github.com/caseyamcl/guzzle_retry_middleware/tree/v2.13.0"
             },
             "funding": [
                 {
@@ -344,7 +342,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-05T15:02:37+00:00"
+            "time": "2025-07-11T12:33:22+00:00"
         },
         {
             "name": "cebe/markdown",
@@ -412,16 +410,16 @@
         },
         {
             "name": "ckeditor/ckeditor",
-            "version": "4.25.1",
+            "version": "dev-full/4.7.x",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ckeditor/ckeditor4-releases.git",
-                "reference": "3fa1987d35342526e4eb2e64f6ec7172561b7328"
+                "reference": "5f1564a3d64cd06d8a4f3f21150f57e892a40939"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ckeditor/ckeditor4-releases/zipball/3fa1987d35342526e4eb2e64f6ec7172561b7328",
-                "reference": "3fa1987d35342526e4eb2e64f6ec7172561b7328",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor4-releases/zipball/5f1564a3d64cd06d8a4f3f21150f57e892a40939",
+                "reference": "5f1564a3d64cd06d8a4f3f21150f57e892a40939",
                 "shasum": ""
             },
             "type": "library",
@@ -434,14 +432,13 @@
             "authors": [
                 {
                     "name": "CKSource",
-                    "homepage": "https://cksource.com"
+                    "homepage": "http://cksource.com"
                 }
             ],
             "description": "JavaScript WYSIWYG web text editor.",
-            "homepage": "https://ckeditor.com/ckeditor-4/",
+            "homepage": "http://ckeditor.com",
             "keywords": [
                 "CKEditor",
-                "ckeditor4",
                 "editor",
                 "fckeditor",
                 "html",
@@ -451,12 +448,12 @@
                 "wysiwyg"
             ],
             "support": {
-                "forum": "https://stackoverflow.com/tags/ckeditor",
-                "issues": "https://github.com/ckeditor/ckeditor4/issues",
-                "source": "https://github.com/ckeditor/ckeditor4",
-                "wiki": "https://ckeditor.com/docs/ckeditor4/latest/"
+                "forum": "http://ckeditor.com/forums",
+                "issues": "http://dev.ckeditor.com",
+                "source": "http://github.com/ckeditor/ckeditor-dev",
+                "wiki": "http://docs.ckeditor.com"
             },
-            "time": "2025-02-05T12:32:07+00:00"
+            "time": "2017-09-13T13:08:14+00:00"
         },
         {
             "name": "dektrium/yii2-rbac",
@@ -3156,68 +3153,6 @@
             "time": "2020-01-28T05:01:22+00:00"
         },
         {
-            "name": "sunhater/kcfinder",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sunhater/kcfinder.git",
-                "reference": "b645d2a81e647d63780c238b130593e32b4d95a9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sunhater/kcfinder/zipball/b645d2a81e647d63780c238b130593e32b4d95a9",
-                "reference": "b645d2a81e647d63780c238b130593e32b4d95a9",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "php": ">=5.3.0"
-            },
-            "suggest": {
-                "ext-curl": "*",
-                "ext-exif": "*",
-                "ext-fileinfo": "*",
-                "ext-gmagick": "*",
-                "ext-http": "*",
-                "ext-imagick": "*",
-                "ext-sockets": "*",
-                "ext-zip": "*"
-            },
-            "default-branch": true,
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0+",
-                "LGPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Pavel Tzonkov",
-                    "email": "sunhater@sunhater.com",
-                    "homepage": "http://sunhater.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "KCFinder web file manager",
-            "homepage": "http://kcfinder.sunhater.com",
-            "keywords": [
-                "explorer",
-                "file",
-                "file explorer",
-                "file manager",
-                "finder",
-                "kcfinder",
-                "manager"
-            ],
-            "support": {
-                "email": "sunhater@sunhater.com",
-                "issues": "https://github.com/sunhater/kcfinder/issues",
-                "source": "https://github.com/sunhater/kcfinder"
-            },
-            "abandoned": true,
-            "time": "2014-08-24T00:00:00+00:00"
-        },
-        {
             "name": "swiftmailer/swiftmailer",
             "version": "v6.3.0",
             "source": {
@@ -5427,7 +5362,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4.0"
+        "php": ">=8.1"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"

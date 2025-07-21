@@ -166,7 +166,7 @@ class Controller extends BaseController
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
             // 取消注释来上传文件/图片
-            // $model->uploadImages(['image']);
+            $model->uploadImages($model->fileAttributes);
 
             if (!$model->hasErrors() && $model->save()) {
                 Yii::$app->session->setFlash('success', $this->modelClass::$modelName . '#' . $model->id . '已添加成功。');
@@ -194,7 +194,7 @@ class Controller extends BaseController
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
             // 取消注释来上传文件/图片
-            // $model->uploadImages(['image']);
+            $model->uploadImages($model->fileAttributes);
 
             if (!$model->hasErrors() && $model->save()) {
                 Yii::$app->session->setFlash('success', $this->modelClass::$modelName . '#' . $model->id . '已更新成功。');

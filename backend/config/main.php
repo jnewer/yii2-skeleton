@@ -33,6 +33,9 @@ return [
                 'console-sql' => '@console/runtime/logs/sql.log',
             ],
         ],
+        'cms' => [
+            'class' => 'backend\modules\cms\Module',
+        ],
     ],
     'components' => [
         'request' => [

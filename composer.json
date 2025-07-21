@@ -20,8 +20,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.4.0",
-        "2amigos/yii2-ckeditor-widget": "^2.2",
+        "php": ">=8.1",
+        "2amigos/yii2-ckeditor-widget": "2.1.1",
         "abhi1693/yii2-config": "^1.0",
         "almasaeed2010/adminlte": "2.4.18",
         "bower-asset/blueimp-gallery": "^2.21",
