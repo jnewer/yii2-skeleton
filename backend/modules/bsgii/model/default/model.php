@@ -35,7 +35,7 @@ use common\components\behaviors\OperationLogBehavior;
 use common\components\behaviors\DatetimeBehavior;
 <?php endif; ?>
 <?php if (isset($useBlameableBehavior)) : ?>
-use common\components\behaviors\BlameableBehavior;
+use yii\behaviors\BlameableBehavior;
 <?php endif; ?>
 <?php if (isset($useSoftDeleteBehavior)) : ?>
 use common\components\behaviors\SoftDeleteBehavior;
@@ -90,7 +90,7 @@ class <?= $className ?> extends ActiveRecord
     <?php if (isset($useSoftDeleteBehavior)) : ?>
         SoftDeleteBehavior::class,
         SoftDeleteQueryBehavior::class,
-    <?php endif; ?>];  
+    <?php endif; ?>];
     }
     /**
      * @inheritdoc
